@@ -589,6 +589,12 @@ def print_debug(string):
 def print_result(string):
     if args.store==True:
         sys.stdout.write(string.encode('utf8'))
+        ######## ahoy! let's check what exactly is printed
+        with open('speed_test_data.txt', "a") as myfile:
+            string_time = time.ctime()
+            unix_time = str(time.time())
+            myfile.write(string_time + "," + unix_time + "," + str(string.encode('utf8')))
+            #print "i did stuff!" 
     #return
 
 def main(args):
