@@ -1,4 +1,4 @@
-#!/usr/bin/env python2
+#!/usr/bin/env python
 #
 # Copyright 2012 Janis Jansons (janis.jansons@janhouse.lv)
 #
@@ -362,7 +362,9 @@ class TeSpeed:
         lon=float(config.find("client").attrib['lon'])
         
         print_debug("IP: %s; Lat: %f; Lon: %f; ISP: %s\n" % (ip, lat, lon, isp))
-        
+        #print_result("%s,%s," % (ip, isp))
+        with open('speed_test_data.txt', "a") as myfile:
+            myfile.write(str(isp) + "," + str(ip) + ",") 
         return { 'ip': ip, 'lat': lat, 'lon': lon, 'isp': isp }
         
 
@@ -590,7 +592,7 @@ def print_result(string):
     if args.store==True:
         sys.stdout.write(string.encode('utf8'))
         ######## ahoy! let's check what exactly is printed
-        with open('speed_test_data.txt', "a") as myfile:
+        with open('pi_bandwidth_raw_data.txt', "a") as myfile:
             string_time = time.ctime()
             unix_time = str(time.time())
             myfile.write(string_time + "," + unix_time + "," + str(string.encode('utf8')))
